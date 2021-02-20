@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import ExampleChart from './ExampleChart '
+import GoogleChart1 from './GoogleChart1 '
 
 
 
@@ -98,7 +98,7 @@ function Comp1() {
         <>
             <Container fluid>
                 <Row className="align-items-center c1row">
-                    <Col lg={7} >
+                    <Col lg={6} >
                         <div className="c1box1">
                             <p className="c1b1p1">Enter your daily investment</p>
                             <input className="c1b1input1"
@@ -111,22 +111,24 @@ function Comp1() {
                             <h5>or {bitCalc} BTC</h5>
                             <p className="c1b1p1">No. of years required to reach ₹1 crore:</p>
                             <p className="c1b1p2"> {userYears} years {userMonths} months</p>
-                            {loading && <p>User invested 3.6 Lakh & user interest 96.4 Lakh</p>}
-                            {!loading && <p>User invested {userInvested} & user interest {userInterest}</p>}
-
                         </div>
                     </Col>
-                    <Col lg={5} >
+                    <Col lg={6} >
                         <div className="c1box2">
                             {/* <h1>box1</h1> */}
-                            <ExampleChart
+                            <GoogleChart1
                                 userInvested={parseFloat(userInvested)}
                                 userInterest={parseFloat(userInterest)}
                             />
+                            <p className="mt-2" style={{ fontSize: "10px" }}>Assumption based on lifetime average yearly growth of 95.21%</p>
                         </div>
                     </Col>
                 </Row>
             </Container>
+            <Container style={{ textAlign: "center" }}>
+                <button className="c2btn1"><a className="c2a1" href="https://www.google.com/" target="blank">Begin your journey now!</a></button>
+            </Container>
+
         </>
     )
 }
