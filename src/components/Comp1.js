@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
+import ExampleChart from './ExampleChart '
+
 
 
 var userInputAmtX = "₹100";
@@ -46,6 +48,9 @@ function Comp1() {
 
     useEffect(() => {
         var amountByUser;
+        if (userInputAmtX === "₹100") {
+            userInputAmtX = 100
+        }
         if (userInputAmtX === 0) {
             setUserYears(0);
             setUserMonths(0);
@@ -73,13 +78,15 @@ function Comp1() {
             let amtInLakhs = Math.abs(amountByUser);
             let interestEarned = Math.abs(10000000 - amountByUser);
             if (amtInLakhs >= 10000000) {
-                amtInLakhs = (amtInLakhs / 10000000).toFixed(1) + " Cr";
+                amtInLakhs = (amtInLakhs / 10000000).toFixed(1);
+                interestEarned = (interestEarned / 10000000).toFixed(1);
+
             } else if (amtInLakhs >= 100000) {
-                amtInLakhs = (amtInLakhs / 100000).toFixed(1) + " Lakhs" || 31.7 + " Lakhs";
-                interestEarned = (interestEarned / 100000).toFixed(1) + " Lakhs" || 68.3 + " Lakhs";
+                amtInLakhs = (amtInLakhs / 100000).toFixed(1);
+                interestEarned = (interestEarned / 100000).toFixed(1);
             } else {
-                amtInLakhs = (amtInLakhs / 10000).toFixed(1) + " Lakhs" || 31.7 + " Lakhs";
-                interestEarned = (interestEarned / 10000).toFixed(1) + " Lakhs" || 68.3 + " Lakhs";
+                amtInLakhs = (amtInLakhs / 10000).toFixed(1);
+                interestEarned = (interestEarned / 10000).toFixed(1);
             }
             setUserInvested(amtInLakhs);
             setUserInterest(interestEarned);
@@ -104,14 +111,18 @@ function Comp1() {
                             <h5>or {bitCalc} BTC</h5>
                             <p className="c1b1p1">No. of years required to reach ₹1 crore:</p>
                             <p className="c1b1p2"> {userYears} years {userMonths} months</p>
-                            {loading && <p>User invested 31.7 Lakh & user interest 68.3 Lakh</p>}
+                            {loading && <p>User invested 3.6 Lakh & user interest 96.4 Lakh</p>}
                             {!loading && <p>User invested {userInvested} & user interest {userInterest}</p>}
 
                         </div>
                     </Col>
                     <Col lg={5} >
                         <div className="c1box2">
-                            <h1>box1</h1>
+                            {/* <h1>box1</h1> */}
+                            <ExampleChart
+                                userInvested={parseFloat(userInvested)}
+                                userInterest={parseFloat(userInterest)}
+                            />
                         </div>
                     </Col>
                 </Row>
