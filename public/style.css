@@ -62,29 +62,6 @@ input::-webkit-inner-spin-button {
   height: 4.2rem;
   font-size: 1.7rem;
 } */
-@media screen and (max-width: 600px) {
-  .c1b1input1 {
-    font-size: 50px;
-  }
-  .c1b1p1 {
-    font-size: 25px;
-  }
-  .c1b1p2 {
-    font-size: 50px;
-  }
-  /* .c2btn1 {
-    width: 16rem;
-    height: 2.8rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    font-size: 1rem;
-  }
-  .c2btn1:hover {
-    width: 18rem;
-    height: 3.1rem;
-    font-size: 1.2rem;
-  } */
-}
 
 .c2btn1 {
   width: 220px;
@@ -97,6 +74,9 @@ input::-webkit-inner-spin-button {
   position: relative;
   z-index: 0;
   border-radius: 10px;
+  -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
 }
 .c2btn1:hover {
   width: 25rem;
@@ -165,5 +145,28 @@ input::-webkit-inner-spin-button {
   }
   100% {
     background-position: 0 0;
+  }
+}
+@media screen and (max-width: 600px) {
+  .c1b1input1 {
+    font-size: 50px;
+  }
+  .c1b1p1 {
+    font-size: 25px;
+  }
+  .c1b1p2 {
+    font-size: 50px;
+  }
+  .c2btn1 {
+    width: 16rem;
+    height: 2.8rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+  }
+  .c2btn1:hover {
+    width: 18rem;
+    height: 3.1rem;
+    font-size: 1.2rem;
   }
 }
