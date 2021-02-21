@@ -108,6 +108,7 @@ function Home() {
                                 value={userInputAmt}
                                 autoComplete="off"
                                 onChange={userInputHandler}
+                                autoFocus
                             />
                             <h5>or {bitCalc} BTC</h5>
                             <p className="c1b1p1">No. of years required to reach ₹1 crore:</p>
