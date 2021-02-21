@@ -1,3 +1,4 @@
+/* THIS IS STYLING FOR HOME PAGE */
 .c1box1,
 .c1box2 {
   text-align: center;
@@ -35,19 +36,6 @@ input::-webkit-inner-spin-button {
   font-weight: 500;
 }
 
-/* .c2btn1 {
-  color: white;
-  background-color: black;
-  width: 20rem;
-  height: 3.2rem;
-  border: none;
-  border-radius: 7px;
-  margin-top: 5rem;
-  font-size: 1.3rem;
-  -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
-  -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
-  box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
-} */
 .c2a1 {
   color: white;
   text-decoration: none;
@@ -56,12 +44,6 @@ input::-webkit-inner-spin-button {
   color: white;
   text-decoration: none;
 }
-
-/* .c2btn1:hover {
-  width: 25rem;
-  height: 4.2rem;
-  font-size: 1.7rem;
-} */
 
 .c2btn1 {
   width: 220px;
@@ -169,4 +151,36 @@ input::-webkit-inner-spin-button {
     height: 3.1rem;
     font-size: 1.2rem;
   }
+}
+
+/* THIS IS STYLING FOR REGISTER PAGE */
+.rc1 {
+  margin-top: 7rem;
+}
+.rc1b1,
+.rc1b2 {
+  text-align: left;
+}
+.rc1b1 {
+  display: block;
+}
+.rc1b1a > img {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .rc1 {
+    margin-top: 3rem;
+  }
+  .rc1b1 {
+    display: none;
+  }
+  .rc1b1a > img {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.rcimg1 {
+  width: 30rem;
 }

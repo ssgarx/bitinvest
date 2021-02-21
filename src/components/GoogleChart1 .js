@@ -5,7 +5,7 @@ const GoogleChart1 = (props) => {
     const data = [
         ["Task", "Hours per Day"],
         [`Your investment ₹${props.userInvested} Lakh`, props.userInvested],
-        [`Interest you earned ₹${props.userInterest} Lakh`, props.userInterest]
+        [`Your gains ₹${props.userGains} Lakh`, props.userGains]
     ]
     var option1 = {
         slices: {

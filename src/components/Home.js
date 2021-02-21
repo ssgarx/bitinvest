@@ -1,18 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import GoogleChart1 from './GoogleChart1 '
 
 
-
+/*eslint-disable no-unused-vars*/
 var userInputAmtX = "₹100";
 var btc = 1;
-function Comp1() {
+function Home() {
     var [userInputAmt, setuserInputAmt] = useState("₹100")
     var [userYears, setUserYears] = useState(7)
     var [userMonths, setUserMonths] = useState(2)
     var [userInvested, setUserInvested] = useState(3.6)
-    var [userInterest, setUserInterest] = useState(96.4)
+    var [userGains, setuserGains] = useState(96.4)
     var [loading, setLoading] = useState(true)
     var [bitCalc, setBitCalc] = useState(0.00003)
 
@@ -55,7 +56,7 @@ function Comp1() {
             setUserYears(0);
             setUserMonths(0);
             setUserInvested(0);
-            setUserInterest(0);
+            setuserGains(0);
         } else {
             let ret = 0.9521;//BTC LIFETIME AVERAGE GROWTH RATE 95.21% (YCHARTS.COM)
             let yearswithdecimal;
@@ -89,7 +90,7 @@ function Comp1() {
                 interestEarned = (interestEarned / 10000).toFixed(1);
             }
             setUserInvested(amtInLakhs);
-            setUserInterest(interestEarned);
+            setuserGains(interestEarned);
         }
 
     }, [userInputAmt])// eslint-disable-line react-hooks/exhaustive-deps
@@ -118,7 +119,7 @@ function Comp1() {
                             {/* <h1>box1</h1> */}
                             <GoogleChart1
                                 userInvested={parseFloat(userInvested)}
-                                userInterest={parseFloat(userInterest)}
+                                userGains={parseFloat(userGains)}
                             />
                             <p className="mt-2" style={{ fontSize: "10px" }}>Assumption based on lifetime average yearly growth of 95.21%</p>
                         </div>
@@ -126,11 +127,13 @@ function Comp1() {
                 </Row>
             </Container>
             <Container style={{ textAlign: "center" }}>
-                <button className="c2btn1"><a className="c2a1" href="https://www.google.com/" target="blank">Begin your journey now!</a></button>
+                <Link to='/register'>
+                    <button className="c2btn1"><a className="c2a1" href="https://www.google.com/" target="blank">Begin your journey now!</a></button>
+                </Link>
             </Container>
 
         </>
     )
 }
 
-export default Comp1;
+export default Home;
