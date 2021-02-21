@@ -167,6 +167,7 @@ input::-webkit-inner-spin-button {
 .rc1b1a > img {
   display: none;
 }
+
 @media screen and (max-width: 992px) {
   .rc1 {
     margin-top: 3rem;
@@ -183,4 +184,41 @@ input::-webkit-inner-spin-button {
 
 .rcimg1 {
   width: 30rem;
+}
+
+.rbtn1 {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 10rem;
+  height: 2.4rem;
+  border-radius: 5px;
+  -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+}
+
+/* THIS IS STYLING FOR LOGIN PAGE */
+.lc1 {
+  margin-top: 5rem;
+}
+
+.lcb1,
+.lcb2 {
+  text-align: center;
+}
+
+.lcb1 > img {
+  max-width: 100%;
+}
+.lbtn1 {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 21.4rem;
+  height: 2.4rem;
+  border-radius: 5px;
+  -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
 }

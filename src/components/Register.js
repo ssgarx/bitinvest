@@ -1,10 +1,10 @@
 import React from 'react'
-import { Col, Container, Form, Row, Button } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import Img1 from '../images/Img1.jpeg'
 import Img2 from '../images/Img2.jpeg'
 import Bch1 from '../images/Bch1.png'
+
 function Register() {
     return (
         <>
@@ -45,7 +45,7 @@ function Register() {
                                 </Form.Group>
 
                                 <Form.Group controlId="formGridPassword2">
-                                    <Form.Control type="password" placeholder="Same password as above" />
+                                    <Form.Control type="password" placeholder="Enter same password as above" />
                                 </Form.Group>
 
                                 <Form.Group controlId="formGridAadhar">
@@ -56,12 +56,13 @@ function Register() {
                                     <Form.Check type="checkbox" label="By signing up, you agree to our Terms , Data Policy and Cookies Policy ." />
                                 </Form.Group>
                                 <Link to="/login">
-                                    <Button style={{ backgroundColor: "black", width: "8rem" }} variant="dark" type="submit">
+                                    {/* <Button style={{ backgroundColor: "black", width: "8rem" }} variant="dark" type="submit">
                                         Submit
-                                    </Button>
+                                    </Button> */}
+                                    <button className="rbtn1" type="submit">Submit</button>
                                 </Link>
                             </Form>
-                            <p>Already have an account?
+                            <p className="mt-1">Already have an account?
                                 <Link to="/login">
                                     Login
                                 </Link>
