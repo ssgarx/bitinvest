@@ -129,7 +129,7 @@ function Home() {
             </Container>
             <Container style={{ textAlign: "center" }}>
                 <Link to='/register'>
-                    <button className="c2btn1"><a className="c2a1" href="https://www.google.com/" target="blank">Begin your journey now!</a></button>
+                    <button className="c2btn1">Begin your journey now!</button>
                 </Link>
             </Container>
 

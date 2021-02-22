@@ -59,11 +59,10 @@ input::-webkit-inner-spin-button {
   -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
   -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
   box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  transition-duration: 1s;
 }
 .c2btn1:hover {
-  width: 25rem;
-  height: 4.2rem;
-  font-size: 1.7rem;
+  width: 280px;
 }
 
 .c2btn1:before {
@@ -98,9 +97,9 @@ input::-webkit-inner-spin-button {
   color: #000;
 }
 
-.c2btn1:active:after {
+/* .c2btn1:active:after {
   background: transparent;
-}
+} */
 
 .c2btn1:hover:before {
   opacity: 1;
