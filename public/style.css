@@ -221,3 +221,183 @@ input::-webkit-inner-spin-button {
   -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
   box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
 }
+
+/* THIS IS STYLING FOR LOGIN PAGE */
+
+/* UPPER SECTION */
+.dc1 {
+  /* border: 1px solid black; */
+  margin-top: 2.5rem;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 10px 25px -4px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 10px 25px -4px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 10px 25px -4px rgba(0, 0, 0, 0.53);
+}
+.dc1c1d1 {
+  text-align: center;
+}
+.dc1c1p1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.dc1a2 > p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: grey;
+}
+.dc1a2 {
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+}
+.dc1a2 > p > span {
+  font-size: 5rem;
+  font-weight: 500;
+  color: black;
+}
+.dc1a3 {
+  display: flex;
+}
+.dc1a3 > div > p {
+  margin: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: grey;
+}
+.dc1a3 > div > p > span {
+  color: black;
+  font-weight: 700;
+}
+.dc1a3 > div {
+  flex: 1;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+}
+.dc1a4 {
+  display: flex;
+  margin-top: 10px;
+}
+.dc1a4 > div {
+  flex: 1;
+  padding: 5px;
+}
+.dc1a4b1 {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 15rem;
+  height: 2.4rem;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(65, 133, 243, 1);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(65, 133, 243, 1);
+  box-shadow: 0px 11px 26px -12px rgba(65, 133, 243, 1);
+  transition-duration: 1s;
+}
+.dc1a4b1:hover {
+  background-color: #4184f3;
+  width: 30rem;
+  -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+}
+.dc1a4b2 {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 15rem;
+  height: 2.4rem;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(255, 87, 34, 1);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(255, 87, 34, 1);
+  box-shadow: 0px 11px 26px -12px rgba(255, 87, 34, 1);
+  transition-duration: 1s;
+}
+.dc1a4b2:hover {
+  background-color: #ff5722;
+  width: 30rem;
+  -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+  box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
+}
+
+/* LOWER SECTION */
+.dc2 {
+  /* border: 1px solid black; */
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 10px 25px -4px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 10px 25px -4px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 10px 25px -4px rgba(0, 0, 0, 0.53);
+}
+.dc2a1b,
+.dc2a2b,
+.dc2a2d {
+  padding: 10px;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+}
+.dc2a1b {
+  height: 15rem;
+  overflow: auto;
+}
+/* .dc2a1b > p{
+
+} */
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+
+.dc2a1a > p,
+.dc2a2a > p,
+.dc2a2c > p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: grey;
+  margin-bottom: 8px;
+}
+.dc2b {
+  padding: 10px;
+}
+.dc2a2b > p {
+  font-size: 4rem;
+  font-weight: 500;
+}
+.dc2a2d > div > p > span {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.dc2a2d > div > button {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 8rem;
+  height: 2.4rem;
+  border-radius: 15px;
+  margin-top: 3px;
+  transition-duration: 1s;
+}
+.dc2a2d > div > button:hover {
+  width: 13rem;
+}
+.dc2a2d {
+  display: flex;
+}
+.dc2a2d > div {
+  flex: 1;
+}
