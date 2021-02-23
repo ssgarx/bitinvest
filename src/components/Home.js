@@ -37,7 +37,7 @@ function Home() {
 
     //FETCH THE LATEST BTC PRICE ONCE ON PAGE LOAD
     useEffect(() => {
-        axios.get("https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
+        axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
             .then(function (response) {
                 var btcPrice = parseFloat(Number(response.data[0].price).toFixed(2));
                 btc = btcPrice;
