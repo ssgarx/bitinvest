@@ -18,9 +18,6 @@ function Register() {
     var [userAgreed, setuserAgreed] = useState(false)
     var [allParamsValid, setallParamsValid] = useState(false)
 
-
-
-
     function handleUserFistNameChange(e) {
         // var userTypedText = document.getElementById('userFirstName').value;
         // console.log("userTypedText", userTypedText);

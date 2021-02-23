@@ -12,11 +12,41 @@ function Login(props) {
     var [userLoginPass, setuserLoginPass] = useState("")
     var [allParamsValid, setallParamsValid] = useState(false)
     var [paramValidity, setparamValidity] = useState(true)
-    let history = useHistory();
+    var history = useHistory();
+
+    var [locationKeys, setLocationKeys] = useState([])
+
+    useEffect(() => {
+        return history.listen(location => {
+            if (history.action === 'PUSH') {
+                setLocationKeys([location.key])
+            }
+
+            if (history.action === 'POP') {
+                if (locationKeys[1] === location.key) {
+                    setLocationKeys(([_, ...keys]) => keys)
+                    // Handle forward event
+                    history.push("/register");
+                } else {
+                    setLocationKeys((keys) => [location.key, ...keys])
+                    // Handle back event
+                    history.push("/register");
+                }
+            }
+        })
+    }, [locationKeys])// eslint-disable-line react-hooks/exhaustive-deps
+
 
     useEffect(() => {
         console.log("Data passed from Register to Login", props.location.userArray);
-        backUpArray = props.location.userArray;
+        //FOLLOWING APPARATUS IS TO PREVENT CRASH ON LOCAL DATA REFRESH
+        if (!props.location.userArray) {
+            console.log("Undefined, hence reset");
+            backUpArray = { fName: "za", lName: "za", email: "za", password: "za" }
+            alert("Page refreshed cased local data wipeout. \nRegister again to proceed.")
+        } else {
+            backUpArray = props.location.userArray;
+        }
     }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
     function handleUserLoginChange(e) {
@@ -62,9 +92,6 @@ function Login(props) {
             // history.push("/login"); //THIS WILL CAUSE LOSS OF DATA
         }
     }
-
-
-
 
     return (
         <>

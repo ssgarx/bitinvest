@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Up from '../images/Up.png';
 import Down from '../images/Down.png';
+import { useHistory } from 'react-router';
 
 function Dashboard(props) {
 
@@ -12,6 +13,32 @@ function Dashboard(props) {
     var [prcChange, setprcChange] = useState("0");
     var [mcChange, setmcChange] = useState("0");
     var [marcUp, setmarcUp] = useState(false)
+
+
+    var history = useHistory();
+
+    var [locationKeys, setLocationKeys] = useState([])
+
+    //FOLLOWING APPARATUS IS TO PREVENT CRASH ON LOCAL DATA REFRESH
+    useEffect(() => {
+        return history.listen(location => {
+            if (history.action === 'PUSH') {
+                setLocationKeys([location.key])
+            }
+
+            if (history.action === 'POP') {
+                if (locationKeys[1] === location.key) {
+                    setLocationKeys(([_, ...keys]) => keys)
+                    // Handle forward event
+                    history.push("/register");
+                } else {
+                    setLocationKeys((keys) => [location.key, ...keys])
+                    // Handle back event
+                    history.push("/register");
+                }
+            }
+        })
+    }, [locationKeys])// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         console.log('useEff API fetch');
@@ -81,7 +108,6 @@ function Dashboard(props) {
                     </Row>
                 </Container>
             </Container>
-
 
             <Container className="dc2 mt-4">
                 <Container className="dc2b">
