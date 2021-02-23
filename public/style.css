@@ -256,6 +256,7 @@ input::-webkit-inner-spin-button {
   font-weight: 500;
   color: black;
 }
+
 .dc1a3 {
   display: flex;
 }
@@ -377,6 +378,26 @@ input::-webkit-inner-spin-button {
 .dc2a2b > p {
   font-size: 4rem;
   font-weight: 500;
+}
+@media screen and (max-width: 992px) {
+  .dc1a2 > p > span {
+    font-size: 3rem;
+  }
+  .dc2a2b > p {
+    font-size: 2.5rem;
+  }
+  .dc1a4 {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .dc1a4b1:hover {
+    width: 20rem;
+  }
+
+  .dc1a4b2:hover {
+    width: 20rem;
+  }
 }
 .dc2a2d > div > p > span {
   font-size: 2rem;
