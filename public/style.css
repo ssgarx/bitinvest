@@ -422,3 +422,85 @@ input::-webkit-inner-spin-button {
 .dc2a2d > div {
   flex: 1;
 }
+
+/* THIS IS STYLING FOR POPUP */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: grey;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 100%;
+  max-width: 640px;
+  background-color: white;
+
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(65, 133, 243, 1);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(65, 133, 243, 1);
+  box-shadow: 0px 11px 26px -12px rgba(65, 133, 243, 1);
+}
+.popup-inner .close-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  color: white;
+  background-color: black;
+  border: none;
+  width: 2.5rem;
+  height: 2.4rem;
+  border-radius: 12px;
+  transition-duration: 1s;
+
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+}
+.popup-inner .close-button:hover {
+  width: 4rem;
+}
+.popup-inner .close-button::after {
+  content: "X";
+  transition-duration: 1s;
+}
+.popup-inner .close-button:hover::after {
+  content: "back";
+}
+.buyInp1 {
+  color: black;
+  background-color: white;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 10px;
+  /* font-size: 80px; */
+  /* font-weight: 500; */
+  text-align: left;
+  width: 7rem;
+}
+.invstBtn {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 30%;
+  height: 2.4rem;
+  border-radius: 15px;
+  transition-duration: 1s;
+
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+}
+.invstBtn:hover {
+  width: 60%;
+}

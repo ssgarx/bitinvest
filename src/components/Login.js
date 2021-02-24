@@ -5,7 +5,7 @@ import Bch1 from '../images/Bch1.png'
 import { Link, useHistory } from 'react-router-dom'
 
 var backUpArray;
-console.log("Login page refreshed");
+// console.log("LOGIN PAGE REFRESHED");
 function Login(props) {
 
     var [userLoginEmail, setuserLoginEmail] = useState("")
@@ -38,10 +38,10 @@ function Login(props) {
 
 
     useEffect(() => {
-        console.log("Data passed from Register to Login", props.location.userArray);
+        // console.log("DATA PASSED FROM REGISTER TO LOGIN", props.location.userArray);
         //FOLLOWING APPARATUS IS TO PREVENT CRASH ON LOCAL DATA REFRESH
         if (!props.location.userArray) {
-            console.log("Undefined, hence reset");
+            // console.log("LOGIN PAGE RESET ");
             backUpArray = { fName: "za", lName: "za", email: "za", password: "za" }
             alert("Page refreshed cased local data wipeout. \nRegister again to proceed.")
         } else {
@@ -75,13 +75,12 @@ function Login(props) {
         var match = "Fail";
         for (let i = 0; i < backUpArray.length; i++) {
             if (backUpArray[i].email === userLoginEmail && backUpArray[i].password === userLoginPass) {
-                // console.log("same");
                 matchedUserData = backUpArray[i];
                 match = "Pass"
                 break;
             }
         }
-        console.log(match);
+        // console.log(match);
         if (match === "Pass") {
             history.push({
                 pathname: "/dashboard",
@@ -131,7 +130,7 @@ function Login(props) {
                                         id="userLoginPass"
                                     />
                                 </Form.Group>
-                                {!paramValidity && <p className="text-danger">Lorem ipsum dolor sit amet consectetur.</p>}
+                                {!paramValidity && <p className="text-danger">Invalid email or password.</p>}
                                 <button
                                     style={!allParamsValid ? { backgroundColor: "rgb(221, 213, 213)" } : {}}
                                     onClick={handleLoginClick}

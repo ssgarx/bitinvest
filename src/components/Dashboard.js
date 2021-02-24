@@ -3,17 +3,31 @@ import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Up from '../images/Up.png';
 import Down from '../images/Down.png';
+
+import BuyPopup from './BuyPopup';
+import WalletPopup from './WalletPopup';
+
 import { useHistory } from 'react-router';
 
+var transacRecords = ["Your transaction records will appear here."];
 function Dashboard(props) {
 
     var [loggedUser, setloggedUser] = useState("NoUserLogged");
-    var [btc, setbtc] = useState("0");
+    var [btc, setbtc] = useState(3294656);
     var [volChnage, setvolChnage] = useState("0");
     var [prcChange, setprcChange] = useState("0");
     var [mcChange, setmcChange] = useState("0");
-    var [marcUp, setmarcUp] = useState(false)
+    var [marcUp, setmarcUp] = useState(false);
 
+    var [buttonPopup, setbuttonPopup] = useState(false)
+    var [buttonWalletPopup, setbuttonWalletPopup] = useState(false)
+
+
+    var [walletBalance, setwalletBalance] = useState(10000)
+    var [buyAmt, setbuyAmt] = useState("")
+    var [investedAmt, setinvestedAmt] = useState(0)
+    var [purchasePower, setpurchasePower] = useState(true)
+    const [walletTopup, setwalletTopup] = useState("")
 
     var history = useHistory();
 
@@ -41,25 +55,36 @@ function Dashboard(props) {
     }, [locationKeys])// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        console.log('useEff API fetch');
-        setloggedUser(props.location.matchedUserData.fName)
-        axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
-            .then(function (response) {
-                setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
-                var { volume_change_pct, price_change_pct, market_cap_change_pct } = response.data[0]["1h"];
-                if (price_change_pct > 0) { setmarcUp(true) } else { setmarcUp(false) }
-                setvolChnage(volume_change_pct);
-                setprcChange(price_change_pct);
-                setmcChange(market_cap_change_pct);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        // console.log('DASHBOARD USEEFFECT TRIGGERED');
+        if (!props.location.matchedUserData) {
+            // console.log("REFRESH CAUSED LOSS OF USERNAME DATA HENCE SET TO UNKNOWN");
+            setloggedUser("UNKNOWN");
+            alert("Page refreshed cased local data wipeout. \nRegister again to proceed.");
+        } else {
+            setloggedUser(props.location.matchedUserData.fName)
+        }
+
+
+
+        // axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
+        //     .then(function (response) {
+        //         setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
+        //         var { volume_change_pct, price_change_pct, market_cap_change_pct } = response.data[0]["1h"];
+        //         if (price_change_pct > 0) { setmarcUp(true) } else { setmarcUp(false) }
+        //         setvolChnage(volume_change_pct);
+        //         setprcChange(price_change_pct);
+        //         setmcChange(market_cap_change_pct);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     })
+
+
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     //WHEN ENABLED CAN REFRESH THE PRICE AT REFRESH RATE WE CHOOSE
     // setInterval(() => {
-    //     console.log('timer executing');
+    //     // console.log('SET INTERVAL TRIGGERED');
     //     axios.get("https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
     //         .then(function (response) {
     //             // console.log(response.data[0]["1h"]);
@@ -76,6 +101,42 @@ function Dashboard(props) {
     //         })
     // }, 900000);
 
+    function createPurchaseTrack(amount, buyOrSell, btcPrice) {
+        // console.log("RECORDS", amount, buyOrSell, btcPrice);
+        var record = `${buyOrSell} ₹${amount} at price ₿${btcPrice} on ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
+        transacRecords.push(record);
+        // console.log("RECORDS ARRAY", transacRecords);
+    }
+
+    function handleBuy(e) {
+        setbuyAmt(e.target.value);
+    }
+
+    function handleBuyClick() {
+        let futureBalance = walletBalance - (document.getElementById("buyInp1").value);
+        if (futureBalance >= 0) {
+            setinvestedAmt((parseFloat(investedAmt) + parseFloat(buyAmt)))
+            setwalletBalance(futureBalance)
+            setbuttonPopup(false);
+            setpurchasePower(true)
+            setbuyAmt("")
+            createPurchaseTrack(buyAmt, "Invested", btc);
+            history.push("/dashboard");
+        } else {
+            setpurchasePower(false)
+        }
+    }
+
+    function handleWalletTopUp(e) {
+        setwalletTopup(e.target.value);
+    }
+    function handleWalletRecharge() {
+        var rechargeAmt = (document.getElementById("wallet").value);
+        setwalletBalance(parseFloat(walletBalance) + parseFloat(rechargeAmt))
+        setbuttonWalletPopup(false)
+        setwalletTopup("")
+        history.push("/dashboard");
+    }
     return (
         <>
             <Container className="dc1">
@@ -98,10 +159,12 @@ function Dashboard(props) {
                             </div>
                             <div style={{ textAlign: "center" }} className="dc1a4">
                                 <div>
-                                    <button className="dc1a4b1">Buy</button>
+                                    <button className="dc1a4b1"
+                                        onClick={() => { setbuttonPopup(true) }}
+                                    >Buy</button>
                                 </div>
                                 <div>
-                                    <button className="dc1a4b2">Sell</button>
+                                    <button className="dc1a4b2" onClick={() => alert("Sell feature not yet available")}>Sell</button>
                                 </div>
                             </div>
                         </Col>
@@ -117,7 +180,7 @@ function Dashboard(props) {
                                 <p className="">Your investment</p>
                             </div>
                             <div style={{ textAlign: "center" }} className="dc2a2b">
-                                <p><span>₹12122</span> <span><img src={Up} alt="arrow-up" /></span></p>
+                                <p><span>₹{investedAmt}</span> <span><img src={Up} alt="arrow-up" /></span></p>
                             </div>
                             <div style={{ textAlign: "left" }} className="dc2a2c">
                                 <p className="">Your wallet</p>
@@ -125,11 +188,11 @@ function Dashboard(props) {
                             <div style={{ textAlign: "center" }} className="dc2a2d">
                                 <div>
                                     <p style={{ margin: "0" }}>
-                                        <span>₹822.35</span>
+                                        <span>₹{walletBalance}</span>
                                     </p>
                                 </div>
                                 <div>
-                                    <button>Add</button>
+                                    <button onClick={() => { setbuttonWalletPopup(true) }}>Add</button>
                                 </div>
                             </div>
                         </Col>
@@ -138,22 +201,29 @@ function Dashboard(props) {
                                 <p className="">Your orders</p>
                             </div>
                             <div style={{ textAlign: "center" }} className="dc2a1b">
-                                <p>23/02/2021 ₹452 buy at ₿3294656.23</p>
-                                <p>23/02/2021 ₹522 buy at ₿3294242.25</p>
-                                <p>23/02/2021 ₹282 buy at ₿3294236.26</p>
-                                <p>23/02/2021 ₹872 buy at ₿3294762.62</p>
-                                <p>23/02/2021 ₹252 buy at ₿3294365.53</p>
-                                <p>23/02/2021 ₹225 buy at ₿3294238.52</p>
-                                <p>23/02/2021 ₹862 buy at ₿3294663.50</p>
-                                <p>23/02/2021 ₹871 buy at ₿3294725.93</p>
-                                <p>23/02/2021 ₹684 buy at ₿3294672.36</p>
-                                <p>23/02/2021 ₹284 buy at ₿3294636.52</p>
-                                <p>23/02/2021 ₹126 buy at ₿3294635.92</p>
+                                {transacRecords.map((record, index) => {
+                                    return <p key={index}>{record}</p>
+                                })}
                             </div>
                         </Col>
                     </Row>
                 </Container>
             </Container>
+            {/* POPUPS */}
+            <BuyPopup trigger={buttonPopup} setTrigger={setbuttonPopup}>
+                <div className="">
+                    <h3>Invest ₹<input id="buyInp1" type="number" className="buyInp1" autoFocus placeholder="500" value={buyAmt} onChange={handleBuy} /> at ₿ price <span>₹{btc}</span></h3>
+                    <h4>Your wallet balance is ₹{walletBalance}</h4>
+                    {!purchasePower && <p className="text-danger" >Insufficient balance, please top it up.</p>}
+                    <button className="invstBtn" onClick={handleBuyClick}>Buy</button>
+                </div>
+            </BuyPopup>
+            <WalletPopup trigger={buttonWalletPopup} setTrigger={setbuttonWalletPopup}>
+                <div className="">
+                    <h3>Add ₹<input id="wallet" type="number" className="buyInp1" autoFocus placeholder="10000" onChange={handleWalletTopUp} value={walletTopup} /> to your wallet</h3>
+                    <button className="invstBtn" onClick={handleWalletRecharge}>Add to wallet</button>
+                </div>
+            </WalletPopup>
         </>
     )
 }
