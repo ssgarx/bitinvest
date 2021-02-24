@@ -504,3 +504,7 @@ input::-webkit-inner-spin-button {
 .invstBtn:hover {
   width: 60%;
 }
+
+.warningImg {
+  width: 100%;
+}

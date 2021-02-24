@@ -66,40 +66,41 @@ function Dashboard(props) {
 
 
 
-        // axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
-        //     .then(function (response) {
-        //         setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
-        //         var { volume_change_pct, price_change_pct, market_cap_change_pct } = response.data[0]["1h"];
-        //         if (price_change_pct > 0) { setmarcUp(true) } else { setmarcUp(false) }
-        //         setvolChnage(volume_change_pct);
-        //         setprcChange(price_change_pct);
-        //         setmcChange(market_cap_change_pct);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     })
+        axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
+            .then(function (response) {
+                setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
+                var { volume_change_pct, price_change_pct, market_cap_change_pct } = response.data[0]["1h"];
+                if (price_change_pct > 0) { setmarcUp(true) } else { setmarcUp(false) }
+                setvolChnage(volume_change_pct);
+                setprcChange(price_change_pct);
+                setmcChange(market_cap_change_pct);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
 
 
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
-    //WHEN ENABLED CAN REFRESH THE PRICE AT REFRESH RATE WE CHOOSE
-    // setInterval(() => {
-    //     // console.log('SET INTERVAL TRIGGERED');
-    //     axios.get("https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
-    //         .then(function (response) {
-    //             // console.log(response.data[0]["1h"]);
-    //             // console.log(parseFloat(Number(response.data[0].price).toFixed(2)));
-    //             setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
-    //             setvolChnage(response.data[0]["1h"].volume_change_pct);
-    //             setprcChange(response.data[0]["1h"].price_change_pct);
-    //             setmcChange(response.data[0]["1h"].market_cap_change_pct);
-    //             // var { 1h } = response.data[0];
-    //             // console.log(1h);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         })
-    // }, 900000);
+    // WHEN ENABLED CAN REFRESH THE PRICE AT REFRESH RATE WE CHOOSE
+
+    setInterval(() => {
+        console.log('SET INTERVAL TRIGGERED');
+        axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
+            .then(function (response) {
+                console.log(response.data[0]["1h"]);
+                // console.log(parseFloat(Number(response.data[0].price).toFixed(2)));
+                setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
+                setvolChnage(response.data[0]["1h"].volume_change_pct);
+                setprcChange(response.data[0]["1h"].price_change_pct);
+                setmcChange(response.data[0]["1h"].market_cap_change_pct);
+                // var { 1h } = response.data[0];
+                // console.log(1h);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }, 60000);
 
     function createPurchaseTrack(amount, buyOrSell, btcPrice) {
         // console.log("RECORDS", amount, buyOrSell, btcPrice);

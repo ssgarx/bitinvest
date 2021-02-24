@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import GoogleChart1 from './GoogleChart1 '
-
+import HomePopup from './HomePopup';
+import WarningImg from '../images/HomeWarning.png'
 
 /*eslint-disable no-unused-vars*/
 var userInputAmtX = "₹100";
@@ -16,6 +17,8 @@ function Home() {
     var [userGains, setuserGains] = useState(96.4)
     var [loading, setLoading] = useState(true)
     var [bitCalc, setBitCalc] = useState(0.00003)
+
+    var [buttonPopup1, setbuttonPopup1] = useState(false)
 
     function userInputHandler(e) {
         userInputAmtX = e.target.value;
@@ -95,6 +98,12 @@ function Home() {
 
     }, [userInputAmt])// eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        setTimeout(() => {
+            setbuttonPopup1(true);
+        }, 2000);
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <>
             <Container fluid>
@@ -132,7 +141,17 @@ function Home() {
                     <button className="c2btn1">Begin your journey now!</button>
                 </Link>
             </Container>
-
+            <HomePopup trigger={buttonPopup1} setTrigger={setbuttonPopup1}>
+                <div className="">
+                    <h5>Please open the console (f12)</h5>
+                    <h5>Click on the cors link</h5>
+                    <h5>Click on request access to demo server (Essential for API's in this projext to function)</h5>
+                    <h5>Refresh</h5>
+                    <img className="warningImg" src={WarningImg} alt="warning" />
+                    <h5>Also avoid refreshing the browser and using browser navigation as the
+                    data is local and refresing the page will cause data reset.</h5>
+                </div>
+            </HomePopup>
         </>
     )
 }
