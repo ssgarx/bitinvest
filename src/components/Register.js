@@ -15,51 +15,82 @@ function Register() {
     var [userPassword1, setuserPassword1] = useState("")
     var [userPassword2, setuserPassword2] = useState("")
     var [userAadhar, setuserAadhar] = useState("")
-    var [userAgreed, setuserAgreed] = useState(false)
     var [allParamsValid, setallParamsValid] = useState(false)
 
+    const [fNameValidity, setfNameValidity] = useState(true)
+    const [lNameValidity, setlNameValidity] = useState(true)
+    const [emailValidity, setemailValidity] = useState(true)
+    const [aadharValidity, setaadharValidity] = useState(true)
+
     function handleUserFistNameChange(e) {
-        // var userTypedText = document.getElementById('userFirstName').value;
-        // console.log("userTypedText", userTypedText);
         setuserFirstName(e.target.value);
         checkAllParams();
+        fnameValidityF(e.target.value)
+    }
+    function fnameValidityF(textx) {
+        if (textx.match(/^[a-zA-Z]+$/)) {
+            setfNameValidity(true);
+            return true;
+        } else {
+            setfNameValidity(false)
+            return false;
+        }
     }
 
     function handleUserLastNameChange(e) {
-        // var userTypedText = document.getElementById('userLastName').value;
-        // console.log("userTypedText", userTypedText);
         setuserLastName(e.target.value);
         checkAllParams();
+        lnameValidityF(e.target.value)
+    }
+
+    function lnameValidityF(textx) {
+        if (textx.match(/^[a-zA-Z]+$/)) {
+            setlNameValidity(true)
+            return true;
+        } else {
+            setlNameValidity(false)
+            return false;
+        }
     }
 
     function handleUserEmailChange(e) {
-        // var userTypedText = document.getElementById("userEmail").value;
-        // console.log('userTypedText', userTypedText);
         setuserEmail(e.target.value);
         checkAllParams();
+        emailValidityF(e.target.value)
+    }
+
+    function emailValidityF(textx) {
+        if (textx.match(/^[a-zA-Z0-9@.]+$/) && textx.includes("@") && textx.includes(".")) {
+            setemailValidity(true);
+            return true;
+        } else {
+            setemailValidity(false);
+            return false;
+        }
     }
 
     function handleUserPasswordChange1(e) {
-        // var userTypedText = document.getElementById("userPassword1").value;
-        // console.log('userTypedText', userTypedText);
         setuserPassword1(e.target.value);
         checkAllParams();
     }
     function handleUserPasswordChange2(e) {
-        // var userTypedText = document.getElementById("userPassword2").value;
-        // console.log('userTypedText', userTypedText);
         setuserPassword2(e.target.value);
         checkAllParams();
     }
     function handleUserAadharChange(e) {
-        // var userTypedText = document.getElementById("userAadhar").value;
-        // console.log('userTypedText', userTypedText);
         setuserAadhar(e.target.value)
         checkAllParams();
+        aadharValidityF(e.target.value)
     }
-    function handleUserAgreeChnage(e) {
-        setuserAgreed(!userAgreed);
-        checkAllParams();
+
+    function aadharValidityF(textx) {
+        if (textx.match(/^[0-9]+$/) && textx.length === 12) {
+            setaadharValidity(true);
+            return true;
+        } else {
+            setaadharValidity(false);
+            return false;
+        }
     }
 
     function checkAllParams() {
@@ -68,7 +99,10 @@ function Register() {
             && document.getElementById("userEmail").value
             && (document.getElementById("userPassword1").value === document.getElementById("userPassword2").value)
             && document.getElementById("userAadhar").value
-            // && !(document.getElementById("userAgreed").defaultChecked)
+            && fnameValidityF(document.getElementById('userFirstName').value)
+            && lnameValidityF(document.getElementById('userLastName').value)
+            && emailValidityF(document.getElementById('userEmail').value)
+            && aadharValidityF(document.getElementById('userAadhar').value)
         ) {
             setallParamsValid(true)
         } else {
@@ -118,8 +152,11 @@ function Register() {
                                             value={userFirstName}
                                             onChange={handleUserFistNameChange}
                                             id="userFirstName"
+                                            pattern="([A-zÀ-ž\s]){2,}"
                                             required
                                         />
+                                        {!fNameValidity &&
+                                            <p style={{ margin: "0" }} className="text-danger">Invalid first name.</p>}
                                     </Form.Group>
 
                                     <Form.Group as={Col}>
@@ -130,6 +167,8 @@ function Register() {
                                             onChange={handleUserLastNameChange}
                                             id="userLastName"
                                         />
+                                        {!lNameValidity &&
+                                            <p style={{ margin: "0" }} className="text-danger">Invalid last name.</p>}
                                     </Form.Group>
                                 </Form.Row>
 
@@ -141,6 +180,8 @@ function Register() {
                                         onChange={handleUserEmailChange}
                                         id="userEmail"
                                     />
+                                    {!emailValidity &&
+                                        <p style={{ margin: "0" }} className="text-danger">Invalid email, must have @ & .com</p>}
                                 </Form.Group>
 
                                 <Form.Group>
@@ -174,16 +215,10 @@ function Register() {
                                         onChange={handleUserAadharChange}
                                         id="userAadhar"
                                     />
+                                    {!aadharValidity &&
+                                        <p style={{ margin: "0" }} className="text-danger">Invalid aadhar number, must contain 12 digits.</p>}
                                 </Form.Group>
 
-                                <Form.Group>
-                                    <Form.Check type="checkbox"
-                                        label="By signing up, you agree to our Terms , Data Policy and Cookies Policy ."
-                                        defaultChecked={userAgreed}
-                                        onChange={handleUserAgreeChnage}
-                                        id="userAgreed"
-                                    />
-                                </Form.Group>
                                 <Link to={{ pathname: "/login", userArray: userArray }}>
                                     <button
                                         style={!allParamsValid ? { backgroundColor: "rgb(221, 213, 213)" } : {}}
@@ -195,7 +230,8 @@ function Register() {
                                     </button>
                                 </Link>
                             </Form>
-                            <p className="mt-1">Already have an account?
+                            <p className="mt-3">Already have an account?
+                            <br />
                                 <Link to={{ pathname: "/login", userArray: userArray }}>
                                     Login
                                 </Link>

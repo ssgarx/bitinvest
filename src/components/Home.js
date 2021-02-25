@@ -39,8 +39,9 @@ function Home() {
     }
 
     //FETCH THE LATEST BTC PRICE ONCE ON PAGE LOAD
+    // https://cors-anywhere.herokuapp.com/
     useEffect(() => {
-        axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
+        axios.get("https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
             .then(function (response) {
                 var btcPrice = parseFloat(Number(response.data[0].price).toFixed(2));
                 btc = btcPrice;
@@ -143,10 +144,10 @@ function Home() {
             </Container>
             <HomePopup trigger={buttonPopup1} setTrigger={setbuttonPopup1}>
                 <div className="">
-                    <h5>Please open the console (f12)</h5>
-                    <h5>Click on the cors link</h5>
-                    <h5>Click on request access to demo server (Essential for API's in this projext to function)</h5>
-                    <h5>Refresh</h5>
+                    <h5>1* Please open the console (f12)</h5>
+                    <h5>2* Click on the cors link</h5>
+                    <h5>3* Click on request access to demo server (Essential for API's in this projext to function)</h5>
+                    <h5>4* Refresh</h5>
                     <img className="warningImg" src={WarningImg} alt="warning" />
                     <h5>Also avoid refreshing the browser and using browser navigation as the
                     data is local and refresing the page will cause data reset.</h5>

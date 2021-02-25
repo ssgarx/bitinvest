@@ -150,6 +150,12 @@ input::-webkit-inner-spin-button {
     height: 3.1rem;
     font-size: 1.2rem;
   }
+  .c1b1input1 {
+    width: 15rem;
+  }
+  .c1row {
+    margin-top: 2rem;
+  }
 }
 
 /* THIS IS STYLING FOR REGISTER PAGE */
@@ -299,7 +305,7 @@ input::-webkit-inner-spin-button {
 }
 .dc1a4b1:hover {
   background-color: #4184f3;
-  width: 30rem;
+  /* width: 30rem; */
   -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
   -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
   box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
@@ -318,7 +324,7 @@ input::-webkit-inner-spin-button {
 }
 .dc1a4b2:hover {
   background-color: #ff5722;
-  width: 30rem;
+  /* width: 30rem; */
   -webkit-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
   -moz-box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
   box-shadow: -2px 14px 25px -4px rgba(0, 0, 0, 0.38);
@@ -341,13 +347,21 @@ input::-webkit-inner-spin-button {
   -moz-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
   box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
 }
+.dc2a2b {
+  display: flex;
+}
+.dc2a2b > div {
+  flex: 1;
+  margin: 0;
+}
 .dc2a1b {
-  height: 15rem;
+  height: 10.5rem;
   overflow: auto;
 }
-/* .dc2a1b > p{
-
-} */
+.dc2a1b > p {
+  border: 1px solid grey;
+  border-radius: 15px;
+}
 /* SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px;
@@ -375,8 +389,8 @@ input::-webkit-inner-spin-button {
 .dc2b {
   padding: 10px;
 }
-.dc2a2b > p {
-  font-size: 4rem;
+.dc2a2b > div > p {
+  font-size: 2rem;
   font-weight: 500;
 }
 @media screen and (max-width: 992px) {
@@ -391,12 +405,8 @@ input::-webkit-inner-spin-button {
     margin-top: 10px;
   }
 
-  .dc1a4b1:hover {
-    width: 20rem;
-  }
-
-  .dc1a4b2:hover {
-    width: 20rem;
+  .dc1a2 > p > span {
+    font-size: 2.2rem;
   }
 }
 .dc2a2d > div > p > span {
@@ -412,9 +422,14 @@ input::-webkit-inner-spin-button {
   border-radius: 15px;
   margin-top: 3px;
   transition-duration: 1s;
+
+  -webkit-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
 }
 .dc2a2d > div > button:hover {
-  width: 13rem;
+  /* width: 13rem; */
+  background-color: #4184f3;
 }
 .dc2a2d {
   display: flex;
@@ -481,19 +496,19 @@ input::-webkit-inner-spin-button {
   border-color: transparent;
   box-shadow: none;
   outline: none;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 10px;
-  /* font-size: 80px; */
+  font-size: 30px;
   /* font-weight: 500; */
   text-align: left;
-  width: 7rem;
+  width: 100%;
 }
 .invstBtn {
   color: white;
   background-color: black;
   border: none;
   width: 30%;
-  height: 2.4rem;
+  height: 3rem;
   border-radius: 15px;
   transition-duration: 1s;
 
@@ -502,9 +517,23 @@ input::-webkit-inner-spin-button {
   box-shadow: 0px 11px 26px -12px rgba(0, 0, 0, 0.53);
 }
 .invstBtn:hover {
-  width: 60%;
+  /* width: 60%; */
+  background-color: #4184f3;
 }
 
 .warningImg {
   width: 100%;
+}
+
+.banks {
+  height: 3rem;
+  border-radius: 10px;
+}
+.banks > option {
+  height: 3rem;
+}
+.homeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

@@ -8,12 +8,14 @@ import BuyPopup from './BuyPopup';
 import WalletPopup from './WalletPopup';
 
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 var transacRecords = ["Your transaction records will appear here."];
+
 function Dashboard(props) {
 
     var [loggedUser, setloggedUser] = useState("NoUserLogged");
-    var [btc, setbtc] = useState(3294656);
+    var [btc, setbtc] = useState(3294656.3423);
     var [volChnage, setvolChnage] = useState("0");
     var [prcChange, setprcChange] = useState("0");
     var [mcChange, setmcChange] = useState("0");
@@ -27,7 +29,10 @@ function Dashboard(props) {
     var [buyAmt, setbuyAmt] = useState("")
     var [investedAmt, setinvestedAmt] = useState(0)
     var [purchasePower, setpurchasePower] = useState(true)
-    const [walletTopup, setwalletTopup] = useState("")
+    var [walletTopup, setwalletTopup] = useState("")
+
+    const [profit, setprofit] = useState("0")
+    const [loss, setloss] = useState("0")
 
     var history = useHistory();
 
@@ -65,10 +70,10 @@ function Dashboard(props) {
         }
 
 
-
-        axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
+        // https://cors-anywhere.herokuapp.com/
+        axios.get("https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
             .then(function (response) {
-                setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
+                setbtc(parseFloat(Number(response.data[0].price).toFixed(4)));
                 var { volume_change_pct, price_change_pct, market_cap_change_pct } = response.data[0]["1h"];
                 if (price_change_pct > 0) { setmarcUp(true) } else { setmarcUp(false) }
                 setvolChnage(volume_change_pct);
@@ -83,12 +88,11 @@ function Dashboard(props) {
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     // WHEN ENABLED CAN REFRESH THE PRICE AT REFRESH RATE WE CHOOSE
-
     setInterval(() => {
-        console.log('SET INTERVAL TRIGGERED');
-        axios.get("https://cors-anywhere.herokuapp.com/https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
+        // console.log('SET INTERVAL TRIGGERED');
+        axios.get("https://api.nomics.com/v1/currencies/ticker?key=ecf232234b93686e9abc884ceda89756&ids=BTC,&interval=1h&convert=INR&per-page=100&page=1")
             .then(function (response) {
-                console.log(response.data[0]["1h"]);
+                // console.log(response.data[0]["1h"]);
                 // console.log(parseFloat(Number(response.data[0].price).toFixed(2)));
                 setbtc(parseFloat(Number(response.data[0].price).toFixed(2)));
                 setvolChnage(response.data[0]["1h"].volume_change_pct);
@@ -100,7 +104,7 @@ function Dashboard(props) {
             .catch(function (error) {
                 console.log(error);
             })
-    }, 60000);
+    }, 50000);
 
     function createPurchaseTrack(amount, buyOrSell, btcPrice) {
         // console.log("RECORDS", amount, buyOrSell, btcPrice);
@@ -115,16 +119,21 @@ function Dashboard(props) {
 
     function handleBuyClick() {
         let futureBalance = walletBalance - (document.getElementById("buyInp1").value);
-        if (futureBalance >= 0) {
-            setinvestedAmt((parseFloat(investedAmt) + parseFloat(buyAmt)))
-            setwalletBalance(futureBalance)
-            setbuttonPopup(false);
-            setpurchasePower(true)
-            setbuyAmt("")
-            createPurchaseTrack(buyAmt, "Invested", btc);
-            history.push("/dashboard");
+        var buyAmtx = buyAmt
+        if (isNaN(parseFloat(buyAmtx))) {
+            buyAmtx = 0;
         } else {
-            setpurchasePower(false)
+            if (futureBalance >= 0) {
+                setinvestedAmt((parseFloat(investedAmt) + parseFloat(buyAmtx)))
+                setwalletBalance(futureBalance)
+                setbuttonPopup(false);
+                setpurchasePower(true)
+                setbuyAmt("")
+                createPurchaseTrack(buyAmtx, "Invested", btc);
+                history.push("/dashboard");
+            } else {
+                setpurchasePower(false)
+            }
         }
     }
 
@@ -133,19 +142,25 @@ function Dashboard(props) {
     }
     function handleWalletRecharge() {
         var rechargeAmt = (document.getElementById("wallet").value);
+        if (isNaN(parseFloat(rechargeAmt))) {
+            rechargeAmt = 0.0;
+        }
+
         setwalletBalance(parseFloat(walletBalance) + parseFloat(rechargeAmt))
         setbuttonWalletPopup(false)
         setwalletTopup("")
         history.push("/dashboard");
     }
+
     return (
         <>
             <Container className="dc1">
                 <Container className="dc1a p-4">
                     <Row>
                         <Col className="dc1c1">
-                            <div style={{ textAlign: "left" }} className="dc1a1">
-                                <p className="dc1c1p1">Welcome back {loggedUser}!</p>
+                            {/* <div style={{ textAlign: "left" }} className="dc1a1"> */}
+                            <div className="dc1a1">
+                                <p className="dc1c1p1">Welcome back {loggedUser}! <span className="homeBtn"><Link to="/">Home</Link></span></p>
                             </div>
                             <div style={{ textAlign: "center" }} className="dc1a2">
                                 <p>current price is
@@ -176,13 +191,27 @@ function Dashboard(props) {
             <Container className="dc2 mt-4">
                 <Container className="dc2b">
                     <Row>
-                        <Col sm={6} className="dc2c3">
+                        <Col sm={7} className="dc2c3">
+
+
                             <div style={{ textAlign: "left" }} className="dc2a2a">
-                                <p className="">Your investment</p>
+                                <p className="">Your investment & <span style={{ color: "#229954" }}>P</span>&<span style={{ color: "#B03A2E" }}>L</span></p>
                             </div>
                             <div style={{ textAlign: "center" }} className="dc2a2b">
-                                <p><span>₹{investedAmt}</span> <span><img src={Up} alt="arrow-up" /></span></p>
+                                {/* <p><span>₹{investedAmt}</span> <span><img src={Up} alt="arrow-up" /></span></p> */}
+                                <div>
+                                    {/* <p><span>₹{investedAmt}</span> <span><img src={Up} alt="arrow-up" /></span></p> */}
+                                    <p style={{ margin: "0" }}><span id="investedAmt">₹{investedAmt}</span></p>
+                                </div>
+                                <div>
+                                    <p style={{ margin: "0", color: "#229954" }}><span>₹{profit}</span></p>
+                                </div>
+                                <div>
+                                    <p style={{ margin: "0", color: "#B03A2E" }}><span>₹{loss}</span></p>
+                                </div>
                             </div>
+
+
                             <div style={{ textAlign: "left" }} className="dc2a2c">
                                 <p className="">Your wallet</p>
                             </div>
@@ -197,7 +226,7 @@ function Dashboard(props) {
                                 </div>
                             </div>
                         </Col>
-                        <Col sm={6} className="dc2c1">
+                        <Col sm={5} className="dc2c1">
                             <div style={{ textAlign: "left" }} className="dc2a1a">
                                 <p className="">Your orders</p>
                             </div>
@@ -205,6 +234,7 @@ function Dashboard(props) {
                                 {transacRecords.map((record, index) => {
                                     return <p key={index}>{record}</p>
                                 })}
+
                             </div>
                         </Col>
                     </Row>
@@ -213,7 +243,9 @@ function Dashboard(props) {
             {/* POPUPS */}
             <BuyPopup trigger={buttonPopup} setTrigger={setbuttonPopup}>
                 <div className="">
-                    <h3>Invest ₹<input id="buyInp1" type="number" className="buyInp1" autoFocus placeholder="500" value={buyAmt} onChange={handleBuy} /> at ₿ price <span>₹{btc}</span></h3>
+                    <h3>Enter the amount u want to invest.</h3>
+                    <input id="buyInp1" type="number" className="buyInp1" autoFocus placeholder="₹500" value={buyAmt} onChange={handleBuy} />
+                    <h3> at ₿ price <span>₹{btc}</span></h3>
                     <h4>Your wallet balance is ₹{walletBalance}</h4>
                     {!purchasePower && <p className="text-danger" >Insufficient balance, please top it up.</p>}
                     <button className="invstBtn" onClick={handleBuyClick}>Buy</button>
@@ -221,8 +253,19 @@ function Dashboard(props) {
             </BuyPopup>
             <WalletPopup trigger={buttonWalletPopup} setTrigger={setbuttonWalletPopup}>
                 <div className="">
-                    <h3>Add ₹<input id="wallet" type="number" className="buyInp1" autoFocus placeholder="10000" onChange={handleWalletTopUp} value={walletTopup} /> to your wallet</h3>
-                    <button className="invstBtn" onClick={handleWalletRecharge}>Add to wallet</button>
+                    <h3>Enter the amount.</h3>
+                    <input id="wallet" type="number" className="buyInp1" autoFocus placeholder="₹10000" onChange={handleWalletTopUp} value={walletTopup} />
+                    <br />
+                    <label style={{ margin: "0" }}>Select account </label>
+                    <br />
+                    <select className="banks">
+                        <option value="bank1">STATE BANK OF INDIA - XXX 123</option>
+                        <option value="bank2">AXIS BANK - XXX 123</option>
+                        <option value="bank3">ICICI BANK - XXX 123</option>
+                    </select>
+
+                    <br />
+                    <button className="invstBtn mt-2" onClick={handleWalletRecharge}>Add to wallet</button>
                 </div>
             </WalletPopup>
         </>
