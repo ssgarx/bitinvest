@@ -2,6 +2,7 @@
   "name": "build_week_project_1",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://bitcoin-crorepati.vercel.app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -9,6 +10,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "canvasjs": "^1.8.3",
+    "cors": "^2.8.5",
     "file-loader": "^6.2.0",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
