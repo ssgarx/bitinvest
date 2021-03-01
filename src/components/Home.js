@@ -149,7 +149,7 @@ function Home() {
                     <h5>4* Come back to this page & Refresh</h5>
                     <img className="warningImg" src={WarningImg} alt="warning" />
                     <h5>Also avoid refreshing the browser and using browser navigation as the
-                    data is local and refresing the page will cause data reset.</h5>
+                    data is local and refreshing the page will cause data reset.</h5>
                 </div>
             </HomePopup>
         </>
